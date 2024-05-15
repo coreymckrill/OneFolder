@@ -66,6 +66,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "portable": {
+      "unpackDirName": "OneFolder",
       "artifactName": "${productName}Portable.${version}.${ext}"
     },
     "files": [

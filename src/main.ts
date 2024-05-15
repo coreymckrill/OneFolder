@@ -17,13 +17,18 @@ import { autoUpdater, UpdateInfo } from 'electron-updater';
 import TrayIcon from '../resources/logo/png/full-color/onefolder-logomark-fc-256x256.png';
 import AppIcon from '../resources/logo/png/full-color/onefolder-logomark-fc-512x512.png';
 import { createBugReport, githubUrl } from '../common/config';
-import { IS_DEV } from '../common/process';
+import { IS_DEV, PORTABLE_DIRECTORY, IS_PORTABLE } from '../common/process';
 import { MainMessenger } from './ipc/main';
 import { WindowSystemButtonPress } from './ipc/messages';
 
-// TODO: change this when running in portable mode, see portable-improvements branch
-const basePath = app.getPath('userData');
+// Portable app config.
+if (IS_PORTABLE) {
+    app.setPath('appData', path.join(PORTABLE_DIRECTORY, 'App'));
+    app.setPath('userData', path.join(PORTABLE_DIRECTORY, 'Data'));
+    app.setPath('temp', path.join(PORTABLE_DIRECTORY, 'Other'));
+}
 
+const basePath = app.getPath('userData');
 const preferencesFilePath = path.join(basePath, 'preferences.json');
 const windowStateFilePath = path.join(basePath, 'windowState.json');
 

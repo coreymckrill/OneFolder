@@ -50,6 +50,7 @@ import {
   WINDOW_SYSTEM_BUTTON_PRESS,
   WINDOW_UNMAXIMIZE,
 } from './messages';
+import { IS_PORTABLE } from '../../common/process';
 
 export class RendererMessenger {
   static initialized = () => ipcRenderer.send(INITIALIZED);
@@ -164,6 +165,9 @@ export class RendererMessenger {
 
   static getDefaultThumbnailDirectory = async () => {
     const userDataPath = await RendererMessenger.getPath('temp');
+    if (IS_PORTABLE) {
+        return path.join(userDataPath, 'thumbnails');
+    }
     return path.join(userDataPath, 'OneFolder', 'thumbnails');
   };
 
