@@ -117,9 +117,10 @@ export interface RowProps {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: ReactElement<GridCellProps> | ReactElement<GridCellProps>[];
   tooltip?: string;
+  indent?: number;
 }
 
-export const Row = ({ id, value, selected, onClick, icon, tooltip, children }: RowProps) => (
+export const Row = ({ id, value, selected, onClick, icon, tooltip, children, indent }: RowProps) => (
   <div
     id={id}
     role="row"
@@ -129,6 +130,11 @@ export const Row = ({ id, value, selected, onClick, icon, tooltip, children }: R
     data-tooltip={tooltip}
   >
     <GridCell>
+      { indent > 0 &&
+          <span>
+            {"\u00A0\u00A0\u00A0\u00A0".repeat(indent)}
+          </span>
+      }
       <span className="combobox-popup-option-icon" aria-hidden>
         {icon}
       </span>
