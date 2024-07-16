@@ -263,11 +263,12 @@ interface TagOptionProps {
 }
 
 export const TagOption = observer(({ id, tag, selected, toggleSelection }: TagOptionProps) => {
-  const [path, hint, subTreeLevel] = useComputed(() => {
-    const path = tag.path.join(' › ');
-    const hint = path.slice(0, Math.max(0, path.length - tag.name.length - 3));
-    const subTreeLevel = tag.path.length - 1;
-    return [path, hint, subTreeLevel];
+  const path = useComputed(() => {
+    return tag.path.join(' › ');
+  }).get();
+
+  const subTreeLevel = useComputed(() => {
+    return tag.path.length - 1;
   }).get();
 
   return (
