@@ -120,7 +120,7 @@ export interface RowProps {
   indent?: number;
 }
 
-export const Row = ({ id, value, selected, onClick, icon, tooltip, children, indent }: RowProps) => (
+export const Row = ({ id, value, selected, onClick, icon, children, tooltip, indent = 0 }: RowProps) => (
   <div
     id={id}
     role="row"
@@ -130,7 +130,7 @@ export const Row = ({ id, value, selected, onClick, icon, tooltip, children, ind
     data-tooltip={tooltip}
   >
     <GridCell>
-      { indent > 0 &&
+      {indent > 0 &&
           <span>
             {"\u00A0\u00A0\u00A0\u00A0".repeat(indent)}
           </span>
