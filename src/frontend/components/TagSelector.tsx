@@ -263,10 +263,11 @@ interface TagOptionProps {
 }
 
 export const TagOption = observer(({ id, tag, selected, toggleSelection }: TagOptionProps) => {
-  const [path, hint] = useComputed(() => {
+  const [path, hint, subTreeLevel] = useComputed(() => {
     const path = tag.path.join(' › ');
     const hint = path.slice(0, Math.max(0, path.length - tag.name.length - 3));
-    return [path, hint];
+    const subTreeLevel = tag.path.length - 1;
+    return [path, hint, subTreeLevel];
   }).get();
 
   return (
@@ -277,8 +278,7 @@ export const TagOption = observer(({ id, tag, selected, toggleSelection }: TagOp
       icon={<span style={{ color: tag.viewColor }}>{IconSet.TAG}</span>}
       onClick={() => toggleSelection(selected ?? false, tag)}
       tooltip={path}
-    >
-      {hint.length > 0 ? <GridCell className="tag-option-hint">{hint}</GridCell> : <GridCell />}
-    </Row>
+      indent={subTreeLevel}
+    />
   );
 });
