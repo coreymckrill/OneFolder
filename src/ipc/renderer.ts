@@ -163,8 +163,8 @@ export class RendererMessenger {
     ipcRenderer.send(TOGGLE_CHECK_UPDATES_ON_STARTUP);
 
   static getDefaultThumbnailDirectory = async () => {
-    const userDataPath = await RendererMessenger.getPath('temp');
-    return path.join(userDataPath, 'OneFolder', 'thumbnails');
+    const userDataPath = await RendererMessenger.getPath('userData');
+    return path.join(userDataPath, 'thumbnails');
   };
 
   static getDefaultBackupDirectory = async () => {
